@@ -1,0 +1,29 @@
+﻿@page "/profile"
+@inject ApplicationDbContext DbContext
+
+<h3>Hồ sơ cá nhân</h3>
+
+<div>
+    <label>Tên:</label>
+    <input @bind="userProfile.Name" />
+</div>
+<div>
+    <label>Email:</label>
+    <input @bind="userProfile.Email" />
+</div>
+<div>
+    <label>URL Hình ảnh:</label>
+    <input @bind="userProfile.ImageUrl" />
+</div>
+<button @onclick="SaveProfile">Lưu</button>
+
+@code {
+    private UserProfile userProfile = new UserProfile();
+
+    private void SaveProfile()
+    {
+        DbContext.UserProfiles.Add(userProfile);
+        DbContext.SaveChanges();
+    }
+}
+
